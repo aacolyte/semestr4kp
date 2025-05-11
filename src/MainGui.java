@@ -28,6 +28,13 @@ public class MainGui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
+        Button startButton = new Button("Start");
+        startButton.setBounds(50,500,100,40);
+        frame.getContentPane().add(startButton);
+
+        Button stopButton = new Button("Stop");
+        stopButton.setBounds(50,550,100,40);
+        frame.getContentPane().add(stopButton);
 
         JLabel passengerCreate = new JLabel("Creating passengers ");
         passengerCreate.setBounds(25,245,200,20);
