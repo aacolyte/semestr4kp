@@ -1,3 +1,5 @@
+package gui;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -5,6 +7,9 @@ import java.io.IOException;
 
 public class MainGui {
     public JFrame frame;
+    JTextField passengersDeparted;
+    Button stopButton;
+    Button startButton;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -28,11 +33,11 @@ public class MainGui {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        Button startButton = new Button("Start");
+        startButton = new Button("Start");
         startButton.setBounds(50,500,100,40);
         frame.getContentPane().add(startButton);
 
-        Button stopButton = new Button("Stop");
+        stopButton = new Button("Stop");
         stopButton.setBounds(50,550,100,40);
         frame.getContentPane().add(stopButton);
 
@@ -148,13 +153,22 @@ public class MainGui {
         cntOfDepartedPassengers.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(cntOfDepartedPassengers);
 
-        JTextField passengersDeparted = new JTextField();
+        passengersDeparted = new JTextField();
         passengersDeparted.setBounds(1000,375,100,20);
         passengersDeparted.setEditable(false);
         passengersDeparted.setFocusable(false);
         frame.getContentPane().add(passengersDeparted);
+    }
 
+    private void doRun(){
+        passengersDeparted.setText("0");
+        startButton.setEnabled(false);
+        //тут начать циклы из isPlaneFlyAway;
 
+    }
+
+    public boolean isPlaneFlyAway(){
+        return !(!this.thread1.isAlive() && !this.thread2.isAlive());
     }
 
 }
