@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e60b589-f32d-4296-bad4-9fc8d2ea0f71" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/AbstractEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/Counter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/Creator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/IFromTo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/Passenger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/PassengerQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entities/Plane.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entities/Music.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Counter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gui/MainGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +19,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -34,11 +26,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "skadi-eng"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/aacolyte/semestr4kp.git",
+    "accountId": "76eb6da8-5bd1-4cef-9133-9f13b5177f86"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2wxNxzDo4uTSHQlwW8yAXKPXlbC" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -48,11 +51,9 @@
     "Application.MainGui.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -75,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1746979516887</updated>
       <workItem from="1746979518392" duration="28000" />
+      <workItem from="1747311907961" duration="3903000" />
     </task>
     <servers />
   </component>

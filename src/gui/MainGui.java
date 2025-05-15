@@ -163,7 +163,7 @@ public class MainGui {
     private void doRun(){
         passengersDeparted.setText("0");
         startButton.setEnabled(false);
-        //тут начать циклы из isPlaneFlyAway;
+        //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ isPlaneFlyAway;
 
     }
 
