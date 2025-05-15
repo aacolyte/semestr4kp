@@ -14,7 +14,7 @@ public class Passenger {
     public Passenger(MainGui mainGui) {
         this.mainGui = mainGui;
         this.jLabel = new JLabel();
-        jLabel.setBounds(50,380,100,20);
+        jLabel.setBounds(50,380,70,70);
         this.mainGui.frame.add(jLabel);
     }
 

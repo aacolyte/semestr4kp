@@ -15,7 +15,7 @@ public class Music {
     public Music(JSlider volume) {
         this.musicVolume = volume;
         try {
-            URL url = this.getClass().getResource("/music/IAmTheStorm.wav");
+            URL url = this.getClass().getResource("/music/fur-elise.wav");
             if (url != null) {
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
                 clip = AudioSystem.getClip();

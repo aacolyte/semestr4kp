@@ -55,6 +55,9 @@ public class MainGui {
         frame.setBounds(100, 100, 1200, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
+        frame.getContentPane().setBackground(Color.decode("#e3e1dd"));
+
+
 
         startButton = new Button("Start");
         startButton.setBounds(50,500,100,40);
@@ -70,8 +73,8 @@ public class MainGui {
         jSlider.setBounds(0,40,100,70);
         jSlider.setMajorTickSpacing(2);
         jSlider.setMinimum(1);
-        jSlider.setMaximum(10);
-        jSlider.setValue(5);
+        jSlider.setMaximum(9);
+        jSlider.setValue(4);
         jSlider.setPaintTicks(true);
         jSlider.setPaintLabels(true);
         frame.add(jSlider);
@@ -82,6 +85,12 @@ public class MainGui {
         stopButton = new Button("Stop");
         stopButton.setBounds(50,550,100,40);
         frame.getContentPane().add(stopButton);
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onStop();
+            }
+        });
 
         JLabel passengerCreate = new JLabel("Creating passengers ");
         passengerCreate.setBounds(25,245,200,20);
@@ -248,15 +257,15 @@ public class MainGui {
     }
     private void onStop(){
         music.stopMusic();
+        endOfWork();
         return;
     }
-    private void EndOfWork(){
+    private void endOfWork(){
         new Thread(){
-            @SuppressWarnings("deprecation")
             @Override
             public void run() {
                 try {
-                    createPassenger.stop();
+                    createPassenger.interrupt();
                     startButton.setEnabled(true);
                     passengersCreated.setEnabled(true);
                     threadPlane1.join();
