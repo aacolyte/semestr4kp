@@ -4,22 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Counter implements IFromTo {
-    private int counter;
+    private int cnt;
     private JTextField jTextField;
 
-    public Counter() {
-        this.counter = 0;
-        this.JTextField = jTextField;
+    public Counter(JTextField jTextField) {
+        this.cnt = 0;
+        this.jTextField = jTextField;
     }
 
     @Override
     public void onOut(Passenger passenger) {
-        // TODO Auto-generated method stub
-        // как-будто тут чето должно быть
     }
     @Override
     public void onIn(Passenger passenger) {
-        setCount(++this.counter);
+        setCount(++this.cnt);
     }
     @Override
     public Component getComponent() {
@@ -27,10 +25,10 @@ public class Counter implements IFromTo {
     }
 
     public int getCount(){
-        return counter;
+        return cnt;
     }
-    public void setCount(int counter){
-        this.counter = counter;
-        jTextField.setText("" + counter);
+    public void setCount(int cnt){
+        this.cnt = cnt;
+        jTextField.setText("" + cnt);
     }
 }

@@ -18,16 +18,16 @@ public class Passenger {
         this.mainGui.frame.add(jLabel);
     }
 
-    public Thread movePassenger(final IFromTo from, final IFromTo to) {
+    public Thread moveFromTo(final IFromTo from, final IFromTo to) {
         Thread thread = new Thread(){
             public void run() {
 
                 int x1From = from.getComponent().getX();
-                int x2To = from.getComponent().getX();
+                int x2To = to.getComponent().getX();
                 int distanceX = x2To - x1From;
 
                 int y1From = from.getComponent().getY();
-                int y2To = from.getComponent().getY();
+                int y2To = to.getComponent().getY();
                 int distanceY = y2To - y1From;
 
                 int distance = (int) Math.round(Math.sqrt(distanceX * distanceX + distanceY * distanceY));
@@ -42,7 +42,7 @@ public class Passenger {
 
                 for (int i = 0, x = x1From, y = y1From ; i < stepsNumber; i++, x += disX, y += disY) {
                     try{
-                        Image image = ImageIO.read(MainGui.class.getResource("/images/passenger.png"));//у нас нету песенджера
+                        Image image = ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png"));//у нас нету песенджера
                         image = image.getScaledInstance(Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight(), Image.SCALE_SMOOTH);
                         Passenger.this.jLabel.setIcon(new ImageIcon(image));
                         Passenger.this.jLabel.setBounds(x, y, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());

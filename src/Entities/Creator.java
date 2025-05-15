@@ -23,7 +23,7 @@ public class Creator extends AbstractEntity{
             --count;
             this.passengerCount.setText(Integer.toString(count));
             this.passenger = new Passenger(this.mainGui);
-            final Thread thread = this.passenger.moveFromTo(this,this.passengerQueue);
+            final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue);
             try{
                 thread.join();
             } catch (InterruptedException e) {

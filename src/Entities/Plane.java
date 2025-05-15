@@ -11,16 +11,16 @@ import java.net.URL;
 
 public class Plane extends AbstractEntity {
     private Counter counter;
-    private JTextField textField;
+    private JPanel panel;
     String[] images = new String[]{
             "/icons/litak1",
             "/icons/litak2",
             "/icons/litak3"};
     public Plane(MainGui mainGui, JLabel label, PassengerQueue passengerQueue,
-                 Counter counter, JTextField textField) {
+                 Counter counter, JPanel panel) {
         super(passengerQueue,mainGui,label);
         this.counter = counter;
-        this.textField = textField;
+        this.panel = panel;
     }
 
 
@@ -46,7 +46,7 @@ public class Plane extends AbstractEntity {
                 throw new RuntimeException(e);
             }
             this.showWorking();
-            this.passenger.moveFromeTo(this,this.counter);
+            this.passenger.moveFromTo(this,this.counter);
         }
     }
 
@@ -62,7 +62,7 @@ public class Plane extends AbstractEntity {
         Image image1 = image.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(image1);
         label.setIcon(icon);
-        textField.setBackground(Color.RED);
+        panel.setBackground(Color.RED);
 
         Image image2 = null;
 
@@ -99,7 +99,7 @@ public class Plane extends AbstractEntity {
                 throw new RuntimeException(e);
             }
             label.setIcon(new ImageIcon(image2));
-            textField.setBackground(Color.GREEN);
+            panel.setBackground(Color.GREEN);
         }
     }
 

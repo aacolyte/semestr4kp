@@ -1,15 +1,38 @@
 package gui;
 
+import Entities.*;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class MainGui {
     public JFrame frame;
-    JTextField passengersDeparted;
-    Button stopButton;
-    Button startButton;
+    private   JTextField passengersDeparted;
+    private Button stopButton;
+    private  Button startButton;
+    private   Thread threadMusic;
+    private  Music music;
+    private JSlider jSlider;
+    private  JTextField passengersCreated;
+    private  JTextField queue1;
+    private JLabel personWait;
+    private  JLabel airPlaneIcon1;
+    private  JLabel airPlaneIcon2;
+    private JLabel airPlaneIcon3;
+    private  JLabel plane1;
+    private JLabel plane2;
+    private JLabel plane3;
+    private JPanel panelPlane1;
+    private JPanel panelPlane2;
+    private JPanel panelPlane3;
+    private Thread createPassenger;
+    private Thread threadPlane1;
+    private Thread threadPlane2;
+    private Thread threadPlane3;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -36,6 +59,25 @@ public class MainGui {
         startButton = new Button("Start");
         startButton.setBounds(50,500,100,40);
         frame.getContentPane().add(startButton);
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                doRun();
+            }
+        });
+
+        jSlider = new JSlider();
+        jSlider.setBounds(0,40,100,70);
+        jSlider.setMajorTickSpacing(2);
+        jSlider.setMinimum(1);
+        jSlider.setMaximum(10);
+        jSlider.setValue(5);
+        jSlider.setPaintTicks(true);
+        jSlider.setPaintLabels(true);
+        frame.add(jSlider);
+
+
+
 
         stopButton = new Button("Stop");
         stopButton.setBounds(50,550,100,40);
@@ -51,7 +93,7 @@ public class MainGui {
         airLineIcon.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/airLineIcon.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(airLineIcon);
 
-        JTextField passengersCreated = new JTextField();
+        passengersCreated = new JTextField("10");
         passengersCreated.setBounds(50,380,100,20);
         passengersCreated.setEditable(false);
         passengersCreated.setFocusable(false);
@@ -71,7 +113,7 @@ public class MainGui {
         ticketsIcon1.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/tickets.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(ticketsIcon1);
 
-        JTextField queue1 = new JTextField();
+        queue1 = new JTextField();
         queue1.setBounds(360,235,100,20);
         queue1.setEditable(false);
         queue1.setFocusable(false);
@@ -98,47 +140,47 @@ public class MainGui {
 
 
 
-        JLabel plane1 = new JLabel("Plane 1");
+        plane1 = new JLabel("Plane 1");
         plane1.setBounds(720,50,200,20);
         plane1.setFont(new Font("Times new Roman", Font.PLAIN, 20));
         frame.getContentPane().add(plane1);
 
-        JLabel airPlaneIcon1 = new JLabel("");
+        airPlaneIcon1 = new JLabel("");
         airPlaneIcon1.setBounds(700, 75, 100, 100);
         airPlaneIcon1.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/litak1.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(airPlaneIcon1);
 
-        JPanel panelPlane1 = new JPanel();
+        panelPlane1 = new JPanel();
         panelPlane1.setBounds(700,180,100,7);
         panelPlane1.setBackground(Color.GREEN);
         frame.getContentPane().add(panelPlane1);
 
-        JLabel plane2 = new JLabel("Plane 2");
+        plane2 = new JLabel("Plane 2");
         plane2.setBounds(720,245,200,20);
         plane2.setFont(new Font("Times new Roman", Font.PLAIN, 20));
         frame.getContentPane().add(plane2);
 
-        JLabel airPlaneIcon2 = new JLabel("");
+        airPlaneIcon2 = new JLabel("");
         airPlaneIcon2.setBounds(700, 270, 100, 100);
         airPlaneIcon2.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/litak2.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(airPlaneIcon2);
 
-        JPanel panelPlane2 = new JPanel();
+        panelPlane2 = new JPanel();
         panelPlane2.setBounds(700,375,100,7);
         panelPlane2.setBackground(Color.GREEN);
         frame.getContentPane().add(panelPlane2);
 
-        JLabel plane3 = new JLabel("Plane 3");
+        plane3 = new JLabel("Plane 3");
         plane3.setBounds(720,445,200,20);
         plane3.setFont(new Font("Times new Roman", Font.PLAIN, 20));
         frame.getContentPane().add(plane3);
 
-        JLabel airPlaneIcon3 = new JLabel("");
+        airPlaneIcon3 = new JLabel("");
         airPlaneIcon3.setBounds(700, 470, 100, 100);
         airPlaneIcon3.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/litak3.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(airPlaneIcon3);
 
-        JPanel panelPlane3 = new JPanel();
+        panelPlane3 = new JPanel();
         panelPlane3.setBounds(700,575,100,7);
         panelPlane3.setBackground(Color.GREEN);
         frame.getContentPane().add(panelPlane3);
@@ -158,17 +200,77 @@ public class MainGui {
         passengersDeparted.setEditable(false);
         passengersDeparted.setFocusable(false);
         frame.getContentPane().add(passengersDeparted);
+
+        personWait = new JLabel("");
+        personWait.setBounds(150, 374, 46, 14);
+        frame.getContentPane().add(personWait);
+
     }
 
     private void doRun(){
+        threadMusic = new Thread(){
+            @Override
+            public void run(){
+                music = new Music(jSlider);
+                music.playMusic();
+                music.musicLoop();
+                new Thread(()->{
+                   while(true){
+                       music.setVolume();
+                       try {
+                           Thread.sleep(500);
+                       } catch (InterruptedException e) {
+                           throw new RuntimeException(e);
+                       }
+                   }
+                }).start();;
+            }
+        };
+        passengersCreated.setEnabled(false);
         passengersDeparted.setText("0");
         startButton.setEnabled(false);
-        //��� ������ ����� �� isPlaneFlyAway;
+        Counter counter = new Counter(this.passengersDeparted);
+        PassengerQueue passengerQueue = new PassengerQueue(this,this.queue1);
+        Creator creator = new Creator(this,this.personWait,passengerQueue,this.passengersCreated);
+        Plane plane1 = new Plane(this,this.airPlaneIcon1,passengerQueue,counter,this.panelPlane1);
+        Plane plane2 = new Plane(this,this.airPlaneIcon2,passengerQueue,counter,this.panelPlane2);
+        Plane plane3 = new Plane(this,this.airPlaneIcon3,passengerQueue,counter,this.panelPlane3);
 
+        (this.createPassenger = new Thread(creator)).start();
+        (this.threadPlane1 = new Thread(plane1)).start();
+        (this.threadPlane2 = new Thread(plane2)).start();
+        (this.threadPlane3 = new Thread(plane3)).start();
+        threadMusic.start();
+
+
+        // isPlaneFlyAway;
+
+    }
+    private void onStop(){
+        music.stopMusic();
+        return;
+    }
+    private void EndOfWork(){
+        new Thread(){
+            @SuppressWarnings("deprecation")
+            @Override
+            public void run() {
+                try {
+                    createPassenger.stop();
+                    startButton.setEnabled(true);
+                    passengersCreated.setEnabled(true);
+                    threadPlane1.join();
+                    threadPlane2.join();
+                    threadPlane3.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }.start();
     }
 
     public boolean isPlaneFlyAway(){
-        return !(!this.thread1.isAlive() && !this.thread2.isAlive());
+        return !(!this.threadPlane1.isAlive() && !this.threadPlane2.isAlive() && !this.threadPlane3.isAlive());
     }
 
 }
