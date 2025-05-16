@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e60b589-f32d-4296-bad4-9fc8d2ea0f71" name="Changes" comment="i am the storm that is aproaching">
-      <change afterPath="$PROJECT_DIR$/src/music/fur-elise.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/plane_fly_away.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Music.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Music.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/AbstractEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/AbstractEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entities/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/PassengerQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/PassengerQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Plane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/MainGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/music/IAmTheStorm.wav" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +59,7 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/OP7/semestr4/OP4/LavrishevMA_lab14&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -69,8 +71,29 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\OP7\semestr4\KP\semestr4KP\src\icons" />
       <recent name="F:\OP7\semestr4\KP\semestr4KP\src\music" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MainGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="gui.MainGui" />
+      <module name="semestr4KP" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainGui" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -89,7 +112,9 @@
       <option name="presentableId" value="Default" />
       <updated>1746979516887</updated>
       <workItem from="1746979518392" duration="28000" />
-      <workItem from="1747330113187" duration="2125000" />
+      <workItem from="1747330113187" duration="2151000" />
+      <workItem from="1747393901819" duration="711000" />
+      <workItem from="1747407753396" duration="9614000" />
     </task>
     <task id="LOCAL-00001" summary="i am the storm that is aproaching">
       <option name="closed" value="true" />
@@ -99,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747327864682</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="i am the storm that is aproaching">
+      <option name="closed" value="true" />
+      <created>1747332601938</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747332601938</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

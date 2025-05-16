@@ -8,14 +8,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class Plane extends AbstractEntity {
     private Counter counter;
     private JPanel panel;
     String[] images = new String[]{
-            "/icons/litak1",
-            "/icons/litak2",
-            "/icons/litak3"};
+            "/icons/litak1.png",
+            "/icons/litak2.png",
+            "/icons/litak3.png"};
     public Plane(MainGui mainGui, JLabel label, PassengerQueue passengerQueue,
                  Counter counter, JPanel panel) {
         super(passengerQueue,mainGui,label);
@@ -28,80 +29,50 @@ public class Plane extends AbstractEntity {
     public void run() {
         while (this.mainGui.isPlaneFlyAway() ||
         this.passengerQueue.getQueueSize()>0) {
-            synchronized (this.passengerQueue){
-                while(this.passengerQueue.getQueueSize()<=0){
-                    try {
-                        this.passengerQueue.wait();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                this.passenger = this.passengerQueue.removeFirst();
-                this.passengerQueue.notify();
+            Passenger passenger = null;
+            try {
+                passenger = this.passengerQueue.getNextPassengerToEscort();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-            Thread thread = this.passenger.moveFromTo(this.passengerQueue,this);
+
+
+            Thread thread = passenger.moveFromTo(this.passengerQueue,this);
             try {
                 thread.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            this.passengerQueue.escortFinished();
             this.showWorking();
-            this.passenger.moveFromTo(this,this.counter);
+            passenger.moveFromTo(this,this.counter);
         }
     }
 
     public void showWorking() {
-        URL url = getClass().getResource("/images/litak1.png");
-        BufferedImage image = null;
 
-        try{
-            image = ImageIO.read(url);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Image image1 = image.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon icon = new ImageIcon(image1);
-        label.setIcon(icon);
-        panel.setBackground(Color.RED);
+        Icon oldIcon = label.getIcon();
 
-        Image image2 = null;
-
-        int minTime = 1700;
-        int step = minTime/10;
-        minTime = (int) (minTime*(10*Math.random()));
-        int i=0;
-        int change_image = (minTime/2);
-        while (minTime>0){
+        SwingUtilities.invokeLater(() -> {
             try {
-                Thread.sleep(step);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            if(minTime<=change_image){
-                try{
-                    image2 = ImageIO.read(getClass().getResource(images[i])).getScaledInstance(
-                            label.getWidth(),label.getHeight(),Image.SCALE_SMOOTH);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                label.setIcon(new ImageIcon(image2));
-                i++;
-                if(i==images.length){
-                    i=0;
-                }
-                minTime-=step;
-            }
-
-            try {
-                image2 = ImageIO.read(getClass().getResource(images[i])).getScaledInstance(
-                        label.getWidth(),label.getHeight(),Image.SCALE_SMOOTH);
+                label.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/plane_fly_away.png")).getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            label.setIcon(new ImageIcon(image2));
-            panel.setBackground(Color.GREEN);
+            panel.setBackground(Color.RED);
+        });
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+
+
+            label.setIcon(oldIcon);
+            panel.setBackground(Color.GREEN);
+
     }
+
 
 
 }

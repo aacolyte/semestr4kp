@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainGui {
     public JFrame frame;
@@ -102,7 +104,7 @@ public class MainGui {
         airLineIcon.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/airLineIcon.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(airLineIcon);
 
-        passengersCreated = new JTextField("10");
+        passengersCreated = new JTextField("30");
         passengersCreated.setBounds(50,380,100,20);
         passengersCreated.setEditable(false);
         passengersCreated.setFocusable(false);
@@ -240,16 +242,19 @@ public class MainGui {
         startButton.setEnabled(false);
         Counter counter = new Counter(this.passengersDeparted);
         PassengerQueue passengerQueue = new PassengerQueue(this,this.queue1);
+
         Creator creator = new Creator(this,this.personWait,passengerQueue,this.passengersCreated);
         Plane plane1 = new Plane(this,this.airPlaneIcon1,passengerQueue,counter,this.panelPlane1);
         Plane plane2 = new Plane(this,this.airPlaneIcon2,passengerQueue,counter,this.panelPlane2);
         Plane plane3 = new Plane(this,this.airPlaneIcon3,passengerQueue,counter,this.panelPlane3);
+
 
         (this.createPassenger = new Thread(creator)).start();
         (this.threadPlane1 = new Thread(plane1)).start();
         (this.threadPlane2 = new Thread(plane2)).start();
         (this.threadPlane3 = new Thread(plane3)).start();
         threadMusic.start();
+
 
 
         // isPlaneFlyAway;
@@ -279,7 +284,7 @@ public class MainGui {
     }
 
     public boolean isPlaneFlyAway(){
-        return !(!this.threadPlane1.isAlive() && !this.threadPlane2.isAlive() && !this.threadPlane3.isAlive());
+        return threadMusic.isAlive();
     }
 
 }

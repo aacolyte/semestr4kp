@@ -17,10 +17,7 @@ public class PassengerQueue implements IFromTo {
         this.queue = new ArrayDeque<Passenger>();
         this.field = field;
     }
-    public void addLast(Passenger passenger) {
-        this.queue.add(passenger);
-        this.field.setText(Integer.toString(this.queue.size()));
-    }
+
     public Passenger removeFirst(){
         if(!this.queue.isEmpty()){
             Passenger passenger = this.queue.removeFirst();
@@ -41,17 +38,36 @@ public class PassengerQueue implements IFromTo {
     }
 
     @Override
-    public void onIn(Passenger passenger) {
-        synchronized (this){
-            addLast(passenger);
-            notify();
-            return;
-        }
-    }
-
-    @Override
     public Component getComponent() {
         return this.field;
     }
 
+    private boolean escortInProgress = false;
+    public synchronized Passenger getNextPassengerToEscort() throws InterruptedException {
+        while(queue.isEmpty() || escortInProgress) {
+            wait();
+        }
+        escortInProgress = true;
+        Passenger p = queue.removeFirst();
+        field.setText(Integer.toString(queue.size()));
+        return p;
+    }
+
+    public synchronized void escortFinished() {
+        escortInProgress = false;
+        notifyAll();
+    }
+
+    // Обновим методы addLast и onIn, чтобы notify вызывался правильно
+    public synchronized void addLast(Passenger passenger) {
+        this.queue.add(passenger);
+        this.field.setText(Integer.toString(this.queue.size()));
+        notifyAll();
+    }
+
+    @Override
+    public synchronized void onIn(Passenger passenger) {
+        addLast(passenger);
+    }
 }
+

@@ -42,7 +42,7 @@ public class Passenger {
 
                 for (int i = 0, x = x1From, y = y1From ; i < stepsNumber; i++, x += disX, y += disY) {
                     try{
-                        Image image = ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png"));//у нас нету песенджера
+                        Image image = ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png"));
                         image = image.getScaledInstance(Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight(), Image.SCALE_SMOOTH);
                         Passenger.this.jLabel.setIcon(new ImageIcon(image));
                         Passenger.this.jLabel.setBounds(x, y, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());
@@ -63,4 +63,7 @@ public class Passenger {
         thread.start();
         return thread;
     }
+
+
+
 }

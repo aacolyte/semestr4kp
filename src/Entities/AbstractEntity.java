@@ -33,7 +33,7 @@ public abstract class AbstractEntity implements IFromTo, Runnable {
     }
     public void showWorking(){
         int n = 10;
-        int minTime = 100;// проверить подходит ли нам время
+        int minTime = 10;// проверить подходит ли нам время
         int step = minTime/n;
         int time = (int) (minTime*(7*Math.random()));
         time/=(step*step);
