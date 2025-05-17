@@ -17,9 +17,9 @@ public class Plane extends AbstractEntity {
             "/icons/litak1.png",
             "/icons/litak2.png",
             "/icons/litak3.png"};
-    public Plane(MainGui mainGui, JLabel label, PassengerQueue passengerQueue,
+    public Plane(MainGui mainGui, JLabel label, PassengerQueue passengerQueue, PassengerQueue passengerQueue2,
                  Counter counter, JPanel panel) {
-        super(passengerQueue,mainGui,label);
+        super(passengerQueue, passengerQueue2,mainGui,label);
         this.counter = counter;
         this.panel = panel;
     }

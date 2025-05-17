@@ -21,6 +21,7 @@ public class MainGui {
     private JSlider jSlider;
     private  JTextField passengersCreated;
     private  JTextField queue1;
+    private  JTextField queue2;
     private JLabel personWait;
     private  JLabel airPlaneIcon1;
     private  JLabel airPlaneIcon2;
@@ -143,7 +144,7 @@ public class MainGui {
         ticketsIcon2.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/tickets.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(ticketsIcon2);
 
-        JTextField queue2 = new JTextField();
+        queue2 = new JTextField();
         queue2.setBounds(360,535,100,20);
         queue2.setEditable(false);
         queue2.setFocusable(false);
@@ -241,12 +242,13 @@ public class MainGui {
         passengersDeparted.setText("0");
         startButton.setEnabled(false);
         Counter counter = new Counter(this.passengersDeparted);
-        PassengerQueue passengerQueue = new PassengerQueue(this,this.queue1);
+        PassengerQueue passengerQueue1 = new PassengerQueue(this,this.queue1);
+        PassengerQueue passengerQueue2 = new PassengerQueue(this,this.queue2);
 
-        Creator creator = new Creator(this,this.personWait,passengerQueue,this.passengersCreated);
-        Plane plane1 = new Plane(this,this.airPlaneIcon1,passengerQueue,counter,this.panelPlane1);
-        Plane plane2 = new Plane(this,this.airPlaneIcon2,passengerQueue,counter,this.panelPlane2);
-        Plane plane3 = new Plane(this,this.airPlaneIcon3,passengerQueue,counter,this.panelPlane3);
+        Creator creator = new Creator(this,this.personWait,passengerQueue1,passengerQueue2,this.passengersCreated);
+        Plane plane1 = new Plane(this,this.airPlaneIcon1,passengerQueue1,passengerQueue2,counter,this.panelPlane1);
+        Plane plane2 = new Plane(this,this.airPlaneIcon2,passengerQueue1,passengerQueue2,counter,this.panelPlane2);
+        Plane plane3 = new Plane(this,this.airPlaneIcon3,passengerQueue1,passengerQueue2,counter,this.panelPlane3);
 
 
         (this.createPassenger = new Thread(creator)).start();

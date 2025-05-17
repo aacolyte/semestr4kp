@@ -10,9 +10,9 @@ public class Creator extends AbstractEntity{
     private JTextField passengerCount;
     private int count = 0;
 
-    public Creator(MainGui mainGui, JLabel jLabel, PassengerQueue passengerQueue,
+    public Creator(MainGui mainGui, JLabel jLabel, PassengerQueue passengerQueue, PassengerQueue passengerQueue2,
                    JTextField passengerCount) {
-        super(passengerQueue,mainGui,jLabel);
+        super(passengerQueue,passengerQueue2,mainGui,jLabel);
         this.passengerCount = passengerCount;
         this.count = Integer.valueOf(passengerCount.getText());
     }
@@ -23,11 +23,22 @@ public class Creator extends AbstractEntity{
             --count;
             this.passengerCount.setText(Integer.toString(count));
             this.passenger = new Passenger(this.mainGui);
-            final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue);
-            try{
-                thread.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            int a = passengerQueue.getQueueSize();
+            int b = passengerQueue2.getQueueSize();
+            if (a > b){
+                final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue2);
+                try{
+                    thread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue);
+                try{
+                    thread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

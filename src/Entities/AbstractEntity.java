@@ -10,9 +10,11 @@ public abstract class AbstractEntity implements IFromTo, Runnable {
     public MainGui mainGui;
     public Passenger passenger;
     public JLabel label;
+    public PassengerQueue passengerQueue2;
 
-    public AbstractEntity(PassengerQueue passengerQueue, MainGui mainGui, JLabel label) {
+    public AbstractEntity(PassengerQueue passengerQueue, PassengerQueue passengerQueue2,MainGui mainGui, JLabel label) {
         this.passengerQueue = passengerQueue;
+        this.passengerQueue2 = passengerQueue2;
         this.mainGui = mainGui;
         this.label = label;
     }
