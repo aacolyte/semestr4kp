@@ -47,7 +47,7 @@ public class Passenger {
                         Passenger.this.jLabel.setIcon(new ImageIcon(image));
                         Passenger.this.jLabel.setBounds(x, y, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());
                         try{
-                            Thread.sleep(100);
+                            Thread.sleep(800);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
