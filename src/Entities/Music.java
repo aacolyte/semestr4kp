@@ -35,7 +35,23 @@ public class Music {
         clip.start();
     }
     public void setVolume() {
-        volumeControler.setValue(volumeControler.getMinimum() - musicVolume.getValue()*(-12));
+        float min = volumeControler.getMinimum();    // обычно ~ Ц80?дЅ
+        float max = volumeControler.getMaximum();    // обычно ~ +6?дЅ
+
+        int sliderMin = musicVolume.getMinimum();    // теперь = 1
+        int sliderMax = musicVolume.getMaximum();    // теперь = 10
+
+        // нормированное положение [0Е1]
+        float ratio = (musicVolume.getValue() - sliderMin)
+                / (float)(sliderMax - sliderMin);
+
+        // интерполируем громкость в дЅ
+        float dB = min + (max - min) * ratio;
+
+        // на вс€кий Ч обрезаем в допустимом диапазоне
+        dB = Math.max(min, Math.min(max, dB));
+
+        volumeControler.setValue(dB);
     }
     public void musicLoop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);

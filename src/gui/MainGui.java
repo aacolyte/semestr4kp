@@ -75,11 +75,15 @@ public class MainGui {
         jSlider = new JSlider();
         jSlider.setBounds(1000,500,100,70);
         jSlider.setMajorTickSpacing(2);
-        jSlider.setMinimum(1);
-        jSlider.setMaximum(9);
-        jSlider.setValue(4);
+        jSlider.setMinimum(0);
+        jSlider.setMaximum(10);
+        jSlider.setValue(6);
         jSlider.setPaintTicks(true);
         jSlider.setPaintLabels(true);
+
+        jSlider.addChangeListener(e ->
+                music.setVolume());
+
         frame.add(jSlider);
 
 

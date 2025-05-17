@@ -42,6 +42,14 @@ public class PassengerQueue implements IFromTo {
         return this.field;
     }
 
+
+
+    public synchronized boolean isEscortInProgress() {
+        return escortInProgress;
+    }
+
+
+
     private boolean escortInProgress = false;
     public synchronized Passenger getNextPassengerToEscort() throws InterruptedException {
         while(queue.isEmpty() || escortInProgress) {

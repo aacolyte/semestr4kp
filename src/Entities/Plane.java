@@ -27,25 +27,43 @@ public class Plane extends AbstractEntity {
 
     @Override
     public void run() {
-        while (this.mainGui.isPlaneFlyAway() ||
-        this.passengerQueue.getQueueSize()>0) {
-            Passenger passenger = null;
-            try {
-                passenger = this.passengerQueue.getNextPassengerToEscort();
+        while (mainGui.isPlaneFlyAway()
+                || passengerQueue.getQueueSize() > 0
+                || passengerQueue2.getQueueSize() > 0) {
+
+            Passenger passenger;
+            PassengerQueue sourceQueue;
+
+            if (passengerQueue.getQueueSize() > 0
+                    && !passengerQueue.isEscortInProgress()) {
+                sourceQueue = passengerQueue;
+            }
+            // »наче Ч если во второй очереди есть пассажиры и она свободна
+            else if (passengerQueue2.getQueueSize() > 0
+                    && !passengerQueue2.isEscortInProgress()) {
+                sourceQueue = passengerQueue2;
+            }else{sourceQueue = passengerQueue;}
+
+
+                try {
+                passenger = sourceQueue.getNextPassengerToEscort();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
-
-            Thread thread = passenger.moveFromTo(this.passengerQueue,this);
+            Thread t = passenger.moveFromTo(
+                    (IFromTo) sourceQueue,
+                    this);
             try {
-                thread.join();
+                t.join();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            this.passengerQueue.escortFinished();
-            this.showWorking();
-            passenger.moveFromTo(this,this.counter);
+            sourceQueue.escortFinished();
+
+            showWorking();
+
+            passenger.moveFromTo(this, counter);
         }
     }
 
