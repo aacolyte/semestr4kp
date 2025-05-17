@@ -47,7 +47,7 @@ public class Passenger {
                         Passenger.this.jLabel.setIcon(new ImageIcon(image));
                         Passenger.this.jLabel.setBounds(x, y, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());
                         try{
-                            Thread.sleep(1000);
+                            Thread.sleep(100);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -64,6 +64,30 @@ public class Passenger {
         return thread;
     }
 
-
-
+    public JLabel getLabel() {
+        return this.jLabel;
+    }
+    public void moveUpAndDisappear(){
+        JLabel label = this.getLabel();
+        int x = label.getX();
+        int y = label.getY();
+        for(int i = 0; i < 3; i++){
+            y -= 100;
+            final int finalY = y;
+            SwingUtilities.invokeLater(() -> label.setLocation(x, finalY));
+            try{
+                Image image = ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png"));
+                image = image.getScaledInstance(Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(image);
+                SwingUtilities.invokeLater(() -> {label.setIcon(icon); label.setBounds(x, finalY, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());});
+                Thread.sleep(500);
+            } catch(IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        label.setIcon(null);
+        label.setVisible(false);
+    }
 }

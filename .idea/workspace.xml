@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e60b589-f32d-4296-bad4-9fc8d2ea0f71" name="Changes" comment="">
+    <list default="true" id="3e60b589-f32d-4296-bad4-9fc8d2ea0f71" name="Changes" comment="master2">
+      <change afterPath="$PROJECT_DIR$/src/icons/railwayStation.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/AbstractEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/AbstractEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entities/Creator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Creator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Plane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Passenger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/MainGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/MainGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -46,20 +51,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MainGui.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.MainGui.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master2",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,11 +82,24 @@
       <updated>1746979516887</updated>
       <workItem from="1746979518392" duration="28000" />
       <workItem from="1747311907961" duration="3903000" />
-      <workItem from="1747497868614" duration="1144000" />
+      <workItem from="1747497868614" duration="5473000" />
     </task>
+    <task id="LOCAL-00001" summary="master2">
+      <option name="closed" value="true" />
+      <created>1747499323608</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747499323608</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="master2" />
+    <option name="LAST_COMMIT_MESSAGE" value="master2" />
   </component>
 </project>

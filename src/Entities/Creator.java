@@ -25,6 +25,16 @@ public class Creator extends AbstractEntity{
             this.passenger = new Passenger(this.mainGui);
             int a = passengerQueue.getQueueSize();
             int b = passengerQueue2.getQueueSize();
+            if(a >=4 && b>=4){
+                Thread thread = new Thread(() -> {passenger.moveUpAndDisappear();});
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                continue;
+            }
             if (a > b){
                 final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue2);
                 try{

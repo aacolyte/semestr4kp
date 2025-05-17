@@ -73,7 +73,7 @@ public class MainGui {
         });
 
         jSlider = new JSlider();
-        jSlider.setBounds(0,40,100,70);
+        jSlider.setBounds(1000,500,100,70);
         jSlider.setMajorTickSpacing(2);
         jSlider.setMinimum(1);
         jSlider.setMaximum(9);
@@ -94,6 +94,11 @@ public class MainGui {
                 onStop();
             }
         });
+
+        JLabel railwayStation = new JLabel("");
+        railwayStation.setBounds(50, 0, 100, 100);
+        railwayStation.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/railwayStation.png")).getScaledInstance(railwayStation.getWidth(), railwayStation.getHeight(), Image.SCALE_SMOOTH)));
+        frame.getContentPane().add(railwayStation);
 
         JLabel passengerCreate = new JLabel("Creating passengers ");
         passengerCreate.setBounds(25,245,200,20);
