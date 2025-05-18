@@ -44,7 +44,7 @@ public class Creator extends AbstractEntity{
             //Thread.sleep(2000);
             thread.join();
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+
         }
     }
 
