@@ -1,6 +1,5 @@
 package Entities;
 
-import com.sun.tools.javac.Main;
 import gui.MainGui;
 
 import javax.swing.*;

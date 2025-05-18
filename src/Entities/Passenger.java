@@ -86,7 +86,7 @@ public class Passenger {
                 SwingUtilities.invokeLater(() -> {label.setIcon(icon); label.setBounds(x, finalY, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());});
                 Thread.sleep(500);
             } catch(IOException e) {
-                e.printStackTrace();
+
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
