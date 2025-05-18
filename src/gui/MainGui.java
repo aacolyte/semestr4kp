@@ -255,7 +255,9 @@ public class MainGui {
         };
         passengersCreated.setEnabled(false);
         startButton.setEnabled(false);
-        counter = new Counter(passengersDeparted);
+        if(counter==null) {
+            counter = new Counter(passengersDeparted);
+        }
         if(passengerQueue1 == null && passengerQueue2 == null) {
             passengerQueue1 = new PassengerQueue(this, queue1);
             passengerQueue2 = new PassengerQueue(this, queue2);
@@ -278,11 +280,12 @@ public class MainGui {
     }
     private void onStop(){
         music.stopMusic();
-        endOfWork();
         creator.plsStop();
         planeObject1.plsStop();
         planeObject2.plsStop();
         planeObject3.plsStop();
+        endOfWork();
+
 
     }
     private void endOfWork(){
@@ -291,20 +294,23 @@ public class MainGui {
             public void run() {
                 try {
                     createPassenger.join();
-                    startButton.setEnabled(true);
-                    passengersCreated.setEnabled(true);
                     threadPlane1.join();
                     threadPlane2.join();
                     threadPlane3.join();
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                SwingUtilities.invokeLater(() -> {
+                    startButton.setEnabled(true);
+                    passengersCreated.setEnabled(true);
+                });
             }
+
         }.start();
     }
 
     public boolean isPlaneFlyAway(){
-        return threadMusic.isAlive();
+        return !planeObject1.isStopped;
     }
 
 }
