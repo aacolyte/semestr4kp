@@ -33,5 +33,4 @@ public abstract class AbstractEntity implements IFromTo, Runnable {
     public Component getComponent() {
         return label;
     }
-
 }

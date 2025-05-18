@@ -8,6 +8,7 @@ public class Creator extends AbstractEntity{
 
     private JTextField passengerCount;
     private int count = 0;
+    private boolean isStopped = false;
 
     public Creator(MainGui mainGui, JLabel jLabel, PassengerQueue passengerQueue, PassengerQueue passengerQueue2,
                    JTextField passengerCount) {
@@ -18,7 +19,7 @@ public class Creator extends AbstractEntity{
 
     @Override
     public void run() {
-        while(count>0){
+        while(count>0 && !isStopped){
             --count;
             passengerCount.setText(Integer.toString(count));
             this.passenger = new Passenger(mainGui);
@@ -47,6 +48,8 @@ public class Creator extends AbstractEntity{
 
         }
     }
-
+    public void plsStop(){
+        isStopped = true;
+    }
 
 }

@@ -35,6 +35,13 @@ public class MainGui {
     private Thread threadPlane1;
     private Thread threadPlane2;
     private Thread threadPlane3;
+    private Creator creator;
+    Plane planeObject1;
+    Plane planeObject2;
+    Plane planeObject3;
+    PassengerQueue passengerQueue1;
+    PassengerQueue passengerQueue2;
+    Counter counter;
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -215,7 +222,7 @@ public class MainGui {
         cntOfDepartedPassengers.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png")).getScaledInstance(airLineIcon.getWidth(), airLineIcon.getHeight(), Image.SCALE_SMOOTH)));
         frame.getContentPane().add(cntOfDepartedPassengers);
 
-        passengersDeparted = new JTextField();
+        passengersDeparted = new JTextField("0");
         passengersDeparted.setBounds(1000,375,100,20);
         passengersDeparted.setEditable(false);
         passengersDeparted.setFocusable(false);
@@ -247,22 +254,23 @@ public class MainGui {
             }
         };
         passengersCreated.setEnabled(false);
-        passengersDeparted.setText("0");
         startButton.setEnabled(false);
-        Counter counter = new Counter(passengersDeparted);
-        PassengerQueue passengerQueue1 = new PassengerQueue(this,queue1);
-        PassengerQueue passengerQueue2 = new PassengerQueue(this,queue2);
+        counter = new Counter(passengersDeparted);
+        if(passengerQueue1 == null && passengerQueue2 == null) {
+            passengerQueue1 = new PassengerQueue(this, queue1);
+            passengerQueue2 = new PassengerQueue(this, queue2);
+        }
 
-        Creator creator = new Creator(this,personWait,passengerQueue1,passengerQueue2,passengersCreated);
-        Plane plane1 = new Plane(this,airPlaneIcon1,passengerQueue1,passengerQueue2,counter,panelPlane1);
-        Plane plane2 = new Plane(this,airPlaneIcon2,passengerQueue1,passengerQueue2,counter,panelPlane2);
-        Plane plane3 = new Plane(this,airPlaneIcon3,passengerQueue1,passengerQueue2,counter,panelPlane3);
+        creator = new Creator(this,personWait,passengerQueue1,passengerQueue2,passengersCreated);
+        planeObject1 = new Plane(this,airPlaneIcon1,passengerQueue1,passengerQueue2,counter,panelPlane1);
+        planeObject2 = new Plane(this,airPlaneIcon2,passengerQueue1,passengerQueue2,counter,panelPlane2);
+        planeObject3 = new Plane(this,airPlaneIcon3,passengerQueue1,passengerQueue2,counter,panelPlane3);
 
 
         (createPassenger = new Thread(creator)).start();
-        (threadPlane1 = new Thread(plane1)).start();
-        (threadPlane2 = new Thread(plane2)).start();
-        (threadPlane3 = new Thread(plane3)).start();
+        (threadPlane1 = new Thread(planeObject1)).start();
+        (threadPlane2 = new Thread(planeObject2)).start();
+        (threadPlane3 = new Thread(planeObject3)).start();
         threadMusic.start();
 
 
@@ -271,14 +279,18 @@ public class MainGui {
     private void onStop(){
         music.stopMusic();
         endOfWork();
-        return;
+        creator.plsStop();
+        planeObject1.plsStop();
+        planeObject2.plsStop();
+        planeObject3.plsStop();
+
     }
     private void endOfWork(){
         new Thread(){
             @Override
             public void run() {
                 try {
-                    createPassenger.interrupt();
+                    createPassenger.join();
                     startButton.setEnabled(true);
                     passengersCreated.setEnabled(true);
                     threadPlane1.join();

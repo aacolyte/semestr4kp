@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Plane extends AbstractEntity {
     private Counter counter;
     private JPanel panel;
-
+    private boolean isStopped = false;
     public Plane(MainGui mainGui, JLabel label, PassengerQueue passengerQueue, PassengerQueue passengerQueue2,
                  Counter counter, JPanel panel) {
         super(passengerQueue, passengerQueue2,mainGui,label);
@@ -22,9 +22,10 @@ public class Plane extends AbstractEntity {
 
     @Override
     public void run() {
-        while (mainGui.isPlaneFlyAway()
+        while ((mainGui.isPlaneFlyAway()
                 || passengerQueue.getQueueSize() > 0
-                || passengerQueue2.getQueueSize() > 0) {
+                || passengerQueue2.getQueueSize() > 0)
+                && !isStopped) {
 
             Passenger passenger = null;
             PassengerQueue sourceQueue = null;
@@ -43,7 +44,7 @@ public class Plane extends AbstractEntity {
                     try {
                         Thread.sleep(300);
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                        // throw new RuntimeException(e);
                     }
                     continue;
                 }
@@ -97,7 +98,7 @@ public class Plane extends AbstractEntity {
         try {
             Thread.sleep(7000);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
 
 
@@ -106,6 +107,8 @@ public class Plane extends AbstractEntity {
 
     }
 
-
+    public void plsStop(){
+        isStopped = true;
+    }
 
 }

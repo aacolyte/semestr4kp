@@ -53,7 +53,9 @@ public class PassengerQueue implements IFromTo {
     public synchronized void addLast(Passenger passenger) {
         //synchronized (this) {
             queue.add(new TimedPassenger(passenger));
-            field.setText(Integer.toString(queue.size()));
+        SwingUtilities.invokeLater(() -> {
+                    field.setText(Integer.toString(queue.size()));
+                });
             notifyAll();
         //}
     }
