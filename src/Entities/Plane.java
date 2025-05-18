@@ -5,18 +5,13 @@ import gui.MainGui;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
-import java.util.List;
+
 
 public class Plane extends AbstractEntity {
     private Counter counter;
     private JPanel panel;
-    String[] images = new String[]{
-            "/icons/litak1.png",
-            "/icons/litak2.png",
-            "/icons/litak3.png"};
+
     public Plane(MainGui mainGui, JLabel label, PassengerQueue passengerQueue, PassengerQueue passengerQueue2,
                  Counter counter, JPanel panel) {
         super(passengerQueue, passengerQueue2,mainGui,label);
@@ -31,29 +26,49 @@ public class Plane extends AbstractEntity {
                 || passengerQueue.getQueueSize() > 0
                 || passengerQueue2.getQueueSize() > 0) {
 
-            Passenger passenger;
-            PassengerQueue sourceQueue;
+            Passenger passenger = null;
+            PassengerQueue sourceQueue = null;
 
-            if (passengerQueue.getQueueSize() > 0
-                    && !passengerQueue.isEscortInProgress()) {
-                sourceQueue = passengerQueue;
+            while (passenger == null) {
+                int size1 = passengerQueue.getQueueSize();
+                int size2 = passengerQueue2.getQueueSize();
+                boolean escort1 = passengerQueue.isEscortInProgress();
+                boolean escort2 = passengerQueue2.isEscortInProgress();
+
+                if (size1 > 0 && !escort1 && (size1 >= size2 || escort2)) {
+                    sourceQueue = passengerQueue;
+                } else if (size2 > 0 && !escort2) {
+                    sourceQueue = passengerQueue2;
+                } else {
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    continue;
+                }
+
+                passenger = sourceQueue.tryGetNextPassengerToEscort();
+                if (passenger == null) {
+                    if (sourceQueue == passengerQueue && size2 > 0 && !escort2) {
+                        sourceQueue = passengerQueue2;
+                        passenger = sourceQueue.tryGetNextPassengerToEscort();
+                    } else if (sourceQueue == passengerQueue2 && size1 > 0 && !escort1) {
+                        sourceQueue = passengerQueue;
+                        passenger = sourceQueue.tryGetNextPassengerToEscort();
+                    }
+
+                    if (passenger == null) {
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
             }
-            // »наче Ч если во второй очереди есть пассажиры и она свободна
-            else if (passengerQueue2.getQueueSize() > 0
-                    && !passengerQueue2.isEscortInProgress()) {
-                sourceQueue = passengerQueue2;
-            }else{sourceQueue = passengerQueue;}
 
-
-                try {
-                passenger = sourceQueue.getNextPassengerToEscort();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-            Thread t = passenger.moveFromTo(
-                    (IFromTo) sourceQueue,
-                    this);
+            Thread t = passenger.moveFromTo(sourceQueue, this);
             try {
                 t.join();
             } catch (InterruptedException e) {
@@ -67,18 +82,18 @@ public class Plane extends AbstractEntity {
         }
     }
 
+
     public void showWorking() {
 
         Icon oldIcon = label.getIcon();
 
-        SwingUtilities.invokeLater(() -> {
             try {
                 label.setIcon(new ImageIcon(ImageIO.read(MainGui.class.getResource("/icons/plane_fly_away.png")).getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH)));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             panel.setBackground(Color.RED);
-        });
+
         try {
             Thread.sleep(7000);
         } catch (InterruptedException e) {

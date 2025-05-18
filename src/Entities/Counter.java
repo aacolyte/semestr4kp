@@ -17,16 +17,13 @@ public class Counter implements IFromTo {
     }
     @Override
     public void onIn(Passenger passenger) {
-        setCount(++this.cnt);
+        setCount(++cnt);
     }
     @Override
     public Component getComponent() {
-        return this.jTextField;
+        return jTextField;
     }
 
-    public int getCount(){
-        return cnt;
-    }
     public void setCount(int cnt){
         this.cnt = cnt;
         jTextField.setText("" + cnt);

@@ -21,35 +21,33 @@ public class Creator extends AbstractEntity{
     public void run() {
         while(count>0){
             --count;
-            this.passengerCount.setText(Integer.toString(count));
-            this.passenger = new Passenger(this.mainGui);
+            passengerCount.setText(Integer.toString(count));
+            this.passenger = new Passenger(mainGui);
             int a = passengerQueue.getQueueSize();
             int b = passengerQueue2.getQueueSize();
+
             if(a >=4 && b>=4){
                 Thread thread = new Thread(() -> {passenger.moveUpAndDisappear();});
                 thread.start();
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+                threadJoin(thread);
                 continue;
             }
-            if (a > b){
-                final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue2);
-                try{
-                    thread.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                final Thread thread = this.passenger.moveFromTo((IFromTo) this, (IFromTo) this.passengerQueue);
-                try{
-                    thread.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+
+            PassengerQueue targetQueue = (a>b)?passengerQueue2:passengerQueue;
+            Thread thread = this.passenger.moveFromTo(this,targetQueue);
+            threadJoin(thread);
+
+
         }
     }
+    private void threadJoin(Thread thread){
+        try{
+            //Thread.sleep(2000);
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

@@ -20,8 +20,7 @@ public class Music {
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
                 clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
-                volumeControler = (FloatControl)
-                clip.getControl(FloatControl.Type.MASTER_GAIN);
+                volumeControler = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             } else {
                 JOptionPane.showMessageDialog(null, "File is not found", "Sound Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -29,30 +28,27 @@ public class Music {
             e.printStackTrace();
         }
     }
+
+    public void setVolume() {
+        float min = volumeControler.getMinimum();
+        float max = volumeControler.getMaximum();
+
+        int sliderMin = musicVolume.getMinimum();
+        int sliderMax = musicVolume.getMaximum();
+
+        float ratio = (musicVolume.getValue() - sliderMin) / (float)(sliderMax - sliderMin);
+
+        float dB = min+(max-min)*ratio;
+
+        volumeControler.setValue(dB);
+    }
+
     public void playMusic() {
         clip.setFramePosition(0);
         setVolume();
         clip.start();
     }
-    public void setVolume() {
-        float min = volumeControler.getMinimum();    // обычно ~ Ц80?дЅ
-        float max = volumeControler.getMaximum();    // обычно ~ +6?дЅ
 
-        int sliderMin = musicVolume.getMinimum();    // теперь = 1
-        int sliderMax = musicVolume.getMaximum();    // теперь = 10
-
-        // нормированное положение [0Е1]
-        float ratio = (musicVolume.getValue() - sliderMin)
-                / (float)(sliderMax - sliderMin);
-
-        // интерполируем громкость в дЅ
-        float dB = min + (max - min) * ratio;
-
-        // на вс€кий Ч обрезаем в допустимом диапазоне
-        dB = Math.max(min, Math.min(max, dB));
-
-        volumeControler.setValue(dB);
-    }
     public void musicLoop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }

@@ -32,29 +32,33 @@ public class Passenger {
 
                 int distance = (int) Math.round(Math.sqrt(distanceX * distanceX + distanceY * distanceY));
 
-                int averageDistance = (Passenger.this.jLabel.getWidth()+Passenger.this.jLabel.getHeight())/2;
+                int averageSize = (Passenger.this.jLabel.getWidth()+Passenger.this.jLabel.getHeight())/2;
 
-                int stepsNumber = distance/averageDistance;
-                int disX = distanceX/stepsNumber;
-                int disY = distanceY/stepsNumber;
+                int stepsNumber = distance/averageSize;
+                int stepX = distanceX/stepsNumber;
+                int stepY = distanceY/stepsNumber;
+
+
+                Image image = null;
+                try {
+                    image = ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                image = image.getScaledInstance(Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight(), Image.SCALE_SMOOTH);
+                Passenger.this.jLabel.setIcon(new ImageIcon(image));
+
 
                 from.onOut(Passenger.this);
 
-                for (int i = 0, x = x1From, y = y1From ; i < stepsNumber; i++, x += disX, y += disY) {
-                    try{
-                        Image image = ImageIO.read(MainGui.class.getResource("/icons/gawaiMan.png"));
-                        image = image.getScaledInstance(Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight(), Image.SCALE_SMOOTH);
-                        Passenger.this.jLabel.setIcon(new ImageIcon(image));
+
+                for (int i = 0, x = x1From, y = y1From ; i < stepsNumber; i++, x += stepX, y += stepY) {
                         Passenger.this.jLabel.setBounds(x, y, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());
                         try{
                             Thread.sleep(800);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        Passenger.this.jLabel.setBounds(x, y, Passenger.this.jLabel.getWidth(), Passenger.this.jLabel.getHeight());
-                    }catch(IOException e) {
-                        e.printStackTrace();
-                    }
                 }
                 Passenger.this.jLabel.setIcon(null);
                 to.onIn(Passenger.this);

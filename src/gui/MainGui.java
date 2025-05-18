@@ -8,8 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class MainGui {
     public JFrame frame;
@@ -250,25 +249,23 @@ public class MainGui {
         passengersCreated.setEnabled(false);
         passengersDeparted.setText("0");
         startButton.setEnabled(false);
-        Counter counter = new Counter(this.passengersDeparted);
-        PassengerQueue passengerQueue1 = new PassengerQueue(this,this.queue1);
-        PassengerQueue passengerQueue2 = new PassengerQueue(this,this.queue2);
+        Counter counter = new Counter(passengersDeparted);
+        PassengerQueue passengerQueue1 = new PassengerQueue(this,queue1);
+        PassengerQueue passengerQueue2 = new PassengerQueue(this,queue2);
 
-        Creator creator = new Creator(this,this.personWait,passengerQueue1,passengerQueue2,this.passengersCreated);
-        Plane plane1 = new Plane(this,this.airPlaneIcon1,passengerQueue1,passengerQueue2,counter,this.panelPlane1);
-        Plane plane2 = new Plane(this,this.airPlaneIcon2,passengerQueue1,passengerQueue2,counter,this.panelPlane2);
-        Plane plane3 = new Plane(this,this.airPlaneIcon3,passengerQueue1,passengerQueue2,counter,this.panelPlane3);
+        Creator creator = new Creator(this,personWait,passengerQueue1,passengerQueue2,passengersCreated);
+        Plane plane1 = new Plane(this,airPlaneIcon1,passengerQueue1,passengerQueue2,counter,panelPlane1);
+        Plane plane2 = new Plane(this,airPlaneIcon2,passengerQueue1,passengerQueue2,counter,panelPlane2);
+        Plane plane3 = new Plane(this,airPlaneIcon3,passengerQueue1,passengerQueue2,counter,panelPlane3);
 
 
-        (this.createPassenger = new Thread(creator)).start();
-        (this.threadPlane1 = new Thread(plane1)).start();
-        (this.threadPlane2 = new Thread(plane2)).start();
-        (this.threadPlane3 = new Thread(plane3)).start();
+        (createPassenger = new Thread(creator)).start();
+        (threadPlane1 = new Thread(plane1)).start();
+        (threadPlane2 = new Thread(plane2)).start();
+        (threadPlane3 = new Thread(plane3)).start();
         threadMusic.start();
 
 
-
-        // isPlaneFlyAway;
 
     }
     private void onStop(){
